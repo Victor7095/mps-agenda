@@ -1,0 +1,9 @@
+Mostrar pro prof:
+
+-> Listar o que as ferramentas gente usou inclusive falando a versão
+
+-> Como testar que é segura?
+
+-> quem são as personas?
+
+-> doc (modelo do banco de dados (notação pé de galina))
