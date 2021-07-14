@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Cronoz - Requisitos</title>
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../print.css" />
+    </head>
+    <body>
+        <main>
+            <ul class="breadcrumb">
+                <li><a href="/Cronoz/">Cronoz</a></li>
+                <li><a href="/Cronoz/docs/">Docs</a></li>
+                <li>Requisitos</li>
+            </ul>
+            <h1>Requisitos Cronoz</h1>
+            <hr>
+            <p>
+                Este documento, visa apresentar os requsitos (funcionais e não funionais) do sistema
+                assim como regras de negócios e casos de uso.
+                Os requisitos de um sistema são descrições dos serviços fornecidos
+                pelo sistema e as suas restrições operacionais. Esses requisitos 
+                refletem as necessidades dos clientes de um sistema que ajuda a 
+                resolver algum problema, por exemplo, controlar um dispositivo, enviar
+                um pedido ou encontrar informações (SOMMERVILLE,2011).
+            </p>
+            <h2>1. Equipe:</h2>
+            <ul>
+                <li>Afonso Ramos Garcia Neto</li>
+                <li>Danilo Souza Frazão</li>
+                <li>Ícaro Santos Pereira</li>
+                <li>João Vitor Matos dos Santos</li>
+                <li>Willians Amaral de Oliveira</li>
+            </ul>
+            <hr>
+            <h2>2. Requisitos Funcionais:</h2>
+            <p>
+                    Os requisitos funcionais são declarações que o sistema deve fornecer.
+            </p>
+            <div class="table-resposive">
+                <div class="divTable">
+                    <div class="divTableBody">
+                        <div class="divTableRow">
+                            <div class="divTableCell">#</div>
+                            <div class="divTableCell">Descrição</div>
+                            <div class="divTableCell">Recorrência</div>
+                            <div class="divTableCell">Criticidade</div>
+                            <div class="divTableCell">Prioridade</div>
+                            <div class="divTableCell">Complexidade</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF001</div>
+                            <div class="divTableCell">Logar Usuário</div>
+                            <div class="divTableCell">7</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">9</div>
+                            <div class="divTableCell">Difícil</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF002</div>
+                            <div class="divTableCell">Cadastrar Usuário</div>
+                            <div class="divTableCell">4</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">8</div>
+                            <div class="divTableCell">Médio</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF003</div>
+                            <div class="divTableCell">Recuperar Senha</div>
+                            <div class="divTableCell">5</div>
+                            <div class="divTableCell">7</div>
+                            <div class="divTableCell">2</div>
+                            <div class="divTableCell">Médio</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF004</div>
+                            <div class="divTableCell">Cadastrar Produto</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">Fácil</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF005</div>
+                            <div class="divTableCell">Exibir Produtos</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">Fácil</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF006</div>
+                            <div class="divTableCell">Escolher Produtos</div>
+                            <div class="divTableCell">1</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">Difícil</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF007</div>
+                            <div class="divTableCell">Escolher Quantidade</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">6</div>
+                            <div class="divTableCell">7</div>
+                            <div class="divTableCell">Médio</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF008</div>
+                            <div class="divTableCell">Escolher Forma de Retirada</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">5</div>
+                            <div class="divTableCell">8</div>
+                            <div class="divTableCell">Médio</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF009</div>
+                            <div class="divTableCell">Finalizar Compra</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">8</div>
+                            <div class="divTableCell">4</div>
+                            <div class="divTableCell">Fácil</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF010</div>
+                            <div class="divTableCell">Notificar Usuário</div>
+                            <div class="divTableCell">9</div>
+                            <div class="divTableCell">6</div>
+                            <div class="divTableCell">9</div>
+                            <div class="divTableCell">Médio</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF011</div>
+                            <div class="divTableCell">Editar Perfil</div>
+                            <div class="divTableCell">9</div>
+                            <div class="divTableCell">6</div>
+                            <div class="divTableCell">6</div>
+                            <div class="divTableCell">Fácil</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF012</div>
+                            <div class="divTableCell">Listar Perfil</div>
+                            <div class="divTableCell">8</div>
+                            <div class="divTableCell">9</div>
+                            <div class="divTableCell">9</div>
+                            <div class="divTableCell">Difícil</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF013</div>
+                            <div class="divTableCell">Estar Disponível</div>
+                            <div class="divTableCell">8</div>
+                            <div class="divTableCell">7</div>
+                            <div class="divTableCell">8</div>
+                            <div class="divTableCell">Fácil</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF014</div>
+                            <div class="divTableCell">Descrição do Pedido</div>
+                            <div class="divTableCell">8</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">9</div>
+                            <div class="divTableCell">Fácil</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF015</div>
+                            <div class="divTableCell">Carregar Imagem</div>
+                            <div class="divTableCell">9</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">Médio</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RF016</div>
+                            <div class="divTableCell">Listar Produtos dos Vendedores</div>
+                            <div class="divTableCell">9</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">10</div>
+                            <div class="divTableCell">Difícil</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             
+            <h4>Complexidade:</h3>
+            <ul>
+                <li>Fácil: 1 semana</li>
+                <li>Médio: 2 semanas</li>
+                <li>Difícil: 3 semanas</li>
+                    
+            </ul>
+            
+            <h2>3. Requisitos Não Funcionais</h2>
+            <p>
+                São restrições aos serviços ou funções oferecidos pelo sistema.
+            </p>
+            <div class="table-resposive">
+                <div class="divTable">
+                    <colgroup>
+                        <col width="100" />
+                        <col width="164" />
+                        <col width="566" />
+                    </colgroup>
+                    <div class="divTableBody">
+                        <div class="divTableRow">
+                            <div class="divTableCell">#</div>
+                            <div class="divTableCell">
+                                Descri&ccedil;&atilde;o
+                            </div>
+                            <div class="divTableCell">Métrica</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RNF001</div>
+                            <div class="divTableCell">Internet</div>
+                            <div class="divTableCell">
+                                O aplicativo s&oacute; poder&aacute; ser
+                                utilizado mediante conex&atilde;o via internet.
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RNF002</div>
+                            <div class="divTableCell">
+                                Vers&atilde;o Android
+                            </div>
+                            <div class="divTableCell">
+                                O aplicativo s&oacute; funcionar&aacute; na
+                                vers&atilde;o Android 4 ou superior.
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RNF003</div>
+                            <div class="divTableCell">Vers&atilde;o IOS</div>
+                            <div class="divTableCell">
+                                O aplicativo s&oacute; poder&aacute; ser
+                                executado na vers&atilde;o IOS 12 ou superior
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RNF004</div>
+                            <div class="divTableCell">Tamanho de imagem</div>
+                            <div class="divTableCell">
+                                O aplicativo ser&aacute; exibido normalmente em
+                                todas as resolu&ccedil;&otilde;es de telas
+                                devido a responsividade.
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RNF005</div>
+                            <div class="divTableCell">Desempenho</div>
+                            <div class="divTableCell">
+                                As a&ccedil;&otilde;es do marketplace
+                                ser&atilde;o executadas em menos de 2 segundos.
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RNF006</div>
+                            <div class="divTableCell">Traf&eacute;go</div>
+                            <div class="divTableCell">
+                                A aplica&ccedil;&atilde;o suportar&aacute;
+                                at&eacute; 2000 acessos simult&acirc;neos
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RNF007</div>
+                            <div class="divTableCell">Navegadores</div>
+                            <div class="divTableCell">
+                                A vers&atilde;o para web funcionar&aacute; em
+                                todos os navegadores mais utilizados
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RNF008</div>
+                            <div class="divTableCell">Seguran&ccedil;a</div>
+                            <div class="divTableCell">
+                                O sistema garantir&aacute; a integridade dos
+                                dados dos usu&aacute;rios. (HTTPS, Captcha)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2>4. Regras de Negócio</h2>
+            <p>
+                Regras de Negócios, são as regras inferidas ao sistema de acordo com o contexto do domínio da aplicação.            </p>
+            <div class="table-resposive">
+                <div class="divTable ">
+                    <div class="divTableBody">
+                        <div class="divTableRow">
+                            <div class="divTableCell">#</div>
+                            <div class="divTableCell">
+                                Descri&ccedil;&atilde;o
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RDN001</div>
+                            <div class="divTableCell">
+                                O hor&aacute;rio de funcionamento do aplicativo
+                                iniciar&aacute; &agrave;s 6h da manh&atilde; e
+                                encerrar&aacute; &agrave;s 22h.
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RDN002</div>
+                            <div class="divTableCell">
+                                O vendedor que obtiver a avalia&ccedil;&atilde;o
+                                m&eacute;dia abaixo de 2 estrelas ser&aacute;
+                                impedido de comercializar os produtos por um
+                                certo tempo.
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RDN003</div>
+                            <div class="divTableCell">
+                                Os vendedores ter&atilde;o que ter algum
+                                v&iacute;nculo com a UEA.
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RDN004</div>
+                            <div class="divTableCell">
+                                O vendedor s&oacute; poder&aacute; receber o
+                                seus rendimentos obtido atrav&eacute;s do
+                                pagamento em cart&atilde;o de cr&eacute;dito
+                                ap&oacute;s 30 dias.
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RDN005</div>
+                            <div class="divTableCell">
+                                O vendedor dever&aacute; pagar uma taxa de 10%
+                                ao m&ecirc;s para o aplicativo.
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RDN006</div>
+                            <div class="divTableCell">
+                                O limite do tempo de entrega dever&aacute; ser
+                                de no m&aacute;ximo 10 minutos.
+                            </div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">RDN007</div>
+                            <div class="divTableCell">
+                                O vendedor poder&aacute; escolher se deseja
+                                buscar ou receber o produto
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2>5. Diagrama de Casos de Uso</h2>
+            <p>
+                Uma visão macro do sistema, descrevendo as principais funções do sistema. 
+            </p>
+            <img src="../images/CasoDeUso.png" alt="" />
+            <h3>5.1 Atores</h3>
+            <p>
+                <strong>Usuário:</strong> Usuário do sistema que, se tiver permissão, poderá realizar 
+                ações de acordo com o que é permitido.     
+            </p>
+            <h3>5.2 Casos de Uso</h3>
+            <p>
+                Segundo Ivar Jacobson, podemos dizer que um caso de uso é um
+                "documento narrativo que descreve a sequência de eventos de um
+                ator que usa um sistema para completar um processo".
+            </p>
+            <ul>
+                <li><a href="uc/uc01.html">Logar Usuário</a></li>
+                <li><a href="uc/uc02.html">Cadastrar Usuário</a></li>
+                <li><a href="uc/uc03.html">Recuperar Senha</a></li>
+                <li><a href="uc/uc04.html">Cadastrar Produto</a></li>
+                <li><a href="uc/uc05.html">Exibir Produtos</a></li>
+                <li><a href="uc/uc06.html">Escolher Produtos</a></li>
+                <li><a href="uc/uc07.html">Escolher Quantidade</a></li>
+                <li><a href="uc/uc08.html">Escolher Forma de Retirada</a></li>
+                <li><a href="uc/uc09.html">Finalizar Compra</a></li>
+                <li><a href="uc/uc10.html">Notificar Usuário</a></li>
+                <li><a href="uc/uc11.html">Editar Perfil</a></li>
+                <li><a href="uc/uc12.html">Listar Pedidos</a></li>
+                <li><a href="uc/uc13.html">Estar Disponível</a></li>
+                <li><a href="uc/uc14.html">Descrição do Pedido</a></li>
+                <li><a href="uc/uc15.html">Carregar Imagem</a></li>
+                <li><a href="uc/uc16.html">Listar Produtos do Vendedor</a></li>
+                
+            </ul>
+            <h3>6. Cronograma</h3>
+            <p>
+                Cronograma para que Cronoz seja desenvolvido.
+            </p>
+            <img src="../images/gantt.PNG" alt""/>
+        </main>
+    </body>
+</html>

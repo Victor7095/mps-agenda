@@ -1,0 +1,80 @@
+body {
+    font-family: sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    background: #333;
+}
+
+main {
+    background-color: #ffffff;
+    margin: 10px 10%;
+    padding: 10px 25px;
+}
+
+main img {
+    width: 100%;
+}
+
+/*Estilo da tabela*/
+/* DivTable.com */
+.divTable {
+    display: table;
+    width: 100%;
+}
+.divTableRow {
+    display: table-row;
+}
+.divTableHeading {
+    background-color: #eee;
+    display: table-header-group;
+}
+.divTableCell,
+.divTableHead {
+    border: 1px solid #999999;
+    display: table-cell;
+    padding: 3px 10px;
+}
+.divTableHeading {
+    background-color: #eee;
+    display: table-header-group;
+    font-weight: bold;
+}
+
+ul.breadcrumb {
+    padding: 10px;
+    list-style: none;
+}
+
+ul.breadcrumb li {
+    display: inline;
+    font-size: 1rem;
+}
+
+ul.breadcrumb li + li:before {
+    padding: 5px;
+    color: black;
+    content: "/\00a0";
+}
+
+ul.breadcrumb li a {
+    color: #aaa;
+    text-decoration: none;
+}
+
+ul.breadcrumb li a:hover {
+    color: #555;
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 425px) {
+    main {
+        background-color: #ffffff;
+        margin: 0;
+        padding: 10px 25px;
+    }
+
+    .table-resposive {
+        overflow-x: scroll;
+        width: 100%;
+    }
+}
