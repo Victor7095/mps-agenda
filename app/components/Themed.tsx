@@ -455,3 +455,72 @@ export const Select = React.memo(
   })
 );
 
+
+interface ItemData {
+	title: string;
+	begin: string;
+	end: string;
+	details: string;
+  onVisitButtonPress: Function;
+}
+  
+export function ItemBox(ItemData: ItemData) {
+	const colorScheme = useColorScheme();
+  
+	const boxStyle: StyleProp<ViewStyle> = {
+	  backgroundColor: Colors[colorScheme].tint,
+	  alignItems: "stretch",
+	  alignSelf: "stretch",
+	  justifyContent: "center",
+	  borderRadius: 10,
+	  marginHorizontal: 20,
+	  marginTop: 15,
+	  paddingHorizontal: 15,
+	  height: 100,
+	};
+  
+	const titleStyle = {
+	  color: Colors[colorScheme].textButton,
+	  fontSize: 20,
+	  fontFamily: "dustismo",
+	};
+
+  const infoStyle: StyleProp<ViewStyle> = {
+    marginTop: 15,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between"
+  };
+  
+	const dateStyle = {
+	  color: Colors[colorScheme].textButton,
+	  fontSize: 14,
+	  fontFamily: "dustismo",
+	  marginTop: 2,
+	};
+
+  const detailsStyle = {
+	  color: '#fb3c44',
+	  fontSize: 14,
+	  fontFamily: "dustismo",
+	  marginTop: 2,
+	};
+    
+	return (
+		<TouchableOpacity
+      style={boxStyle}
+      onPress={() => ItemData.onVisitButtonPress()}
+    >
+		  <DefaultText style={titleStyle}>{ItemData.title}</DefaultText>
+		  
+      <DefaultView style={infoStyle}>
+        <DefaultText style={dateStyle}>Início: {ItemData.begin}</DefaultText>
+        <DefaultText style={detailsStyle}>{ItemData.details}</DefaultText>
+      </DefaultView>
+
+      <DefaultText style={dateStyle}>Fim: {ItemData.end}</DefaultText>
+
+		</TouchableOpacity>
+	);
+}
+ 

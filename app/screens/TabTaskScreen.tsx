@@ -1,11 +1,37 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, ItemBox } from '../components/Themed';
 
-export default function TabTaskScreen() {
+import Colors from "../constants/Colors";
+import useColorScheme from "../hooks/useColorScheme";
+
+import { useNavigation } from "@react-navigation/native";
+import { Ionicons as Icon } from "@expo/vector-icons";
+
+
+export default function TabListScreen() {
+  const colorScheme = useColorScheme();
+
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tarefas</Text>
+      <View style={styles.superiorAlign}>
+        <Text style={styles.title}>Suas tarefas</Text>
+        
+        <ItemBox
+          title='Trabalho infernal de MPS'
+          begin='10:00 24/07/2021'
+          end='18:00 30/07/2021'
+          details='URGENTE'
+          onVisitButtonPress={() => navigation.navigate("TabNavigator")}
+        />
+      </View>
+
+      <TouchableOpacity style={styles.addButton}>
+        <Icon name="add-circle" color='#fb3c44' size={60} />
+      </TouchableOpacity>
+
     </View>
   );
 }
@@ -14,15 +40,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between'
   },
+
+  superiorAlign: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    alignSelf: 'stretch'
+  },
+
   title: {
-    fontSize: 20,
+    fontSize: 23,
     fontWeight: 'bold',
+    marginTop: 20,
+    marginBottom: 8,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+
+  addButton: {
+    alignSelf: 'flex-end',
+    marginBottom: 5,
+    marginRight: 5
+  }
+  
 });

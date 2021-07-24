@@ -1,28 +1,84 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import { Text, View } from '../components/Themed';
 
+import { Calendar, LocaleConfig } from 'react-native-calendars';
+
+import Colors from "../constants/Colors";
+import useColorScheme from "../hooks/useColorScheme";
+
+
 export default function TabCalendarScreen() {
+  const colorScheme = useColorScheme();
+
+  LocaleConfig.locales['br'] = {
+    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    monthNamesShort: ['Jan','Fev','Mar','Abril','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
+    today: 'Aujourd\'hui'
+  };
+  LocaleConfig.defaultLocale = 'br';
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Calendário</Text>
+      <Image
+        style={styles.logo}
+        source={{ uri: "https://i.imgur.com/EBPBJTM.png" }}
+      />
+
+      <Calendar
+        style={styles.calendar}
+        theme={{
+          calendarBackground: Colors[colorScheme].inputBackgroundColor,
+          arrowColor: '#fb3c44',
+          dayTextColor: Colors[colorScheme].tint,
+          textDisabledColor: 'gray',
+          todayTextColor: '#fb3c44',
+          selectedDayBackgroundColor: '#fb3c44',
+          selectedDayTextColor: 'white',
+          textSectionTitleColor: '#fb3c44',
+          monthTextColor: Colors[colorScheme].tint,
+          textDayFontFamily: 'dustismo',
+          textDayFontSize: 18,
+          textMonthFontFamily: 'dustismo',
+          textMonthFontSize: 20,
+          textMonthFontWeight: 'bold',
+          textDayHeaderFontFamily: 'dustismo',
+          textDayHeaderFontSize: 16
+        }}
+      >
+      </Calendar>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
+
+  logo: {
+    width: 150,
+    height: 45,
+    marginVertical: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+  },
+
+  calendar: {
+    width: 350,
+    alignSelf: 'stretch',
+    borderRadius: 10,
+  },
+
   title: {
     fontSize: 20,
     fontWeight: 'bold',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+  
 });
