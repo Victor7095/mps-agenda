@@ -140,7 +140,7 @@ export function Title(props: TextProps) {
   const defaultStyle = {
     marginVertical: 20,
     color: useThemeColor({ light: lightColor, dark: darkColor }, "tint"),
-    fontSize: 22,
+    fontSize: 23,
     fontFamily: "dustismo",
     textAlign: "center" as "center",
   };
@@ -314,26 +314,17 @@ export function TouchableOpacity(props: TouchableOpacityProps) {
   );
 }
 
-export function ReturnButton(props: TouchableOpacityProps) {
+export function CancelButton(props: TouchableOpacityProps) {
   const { style, onPress, ...otherProps } = props;
 
   const navigation = useNavigation();
   const colorScheme = useColorScheme();
 
-  const defaultStyle: StyleProp<TextStyle> = {
-    flexDirection: "row",
-    paddingHorizontal: 10,
+  const defaultStyle: StyleProp<ViewStyle> = {
     alignSelf: "flex-start",
     alignItems: "center",
     justifyContent: "center",
-    height: 40,
-  };
-
-  const textStyle = {
-    color: Colors[colorScheme].tint,
-    paddingLeft: 2,
-    fontSize: 16,
-    fontFamily: "dustismo",
+    marginLeft: 2,
   };
 
   const _onPress = onPress || (() => navigation.goBack());
@@ -347,11 +338,10 @@ export function ReturnButton(props: TouchableOpacityProps) {
       {props.children || (
         <>
           <Icon
-            name="ios-arrow-back"
-            size={20}
+            name="ios-close"
+            size={35}
             color={Colors[colorScheme].tint}
           />
-          <Text style={textStyle}>Voltar</Text>
         </>
       )}
     </DefaultTouchableOpacity>

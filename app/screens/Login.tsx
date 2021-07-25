@@ -72,7 +72,7 @@ export default () => {
 
   const handleSignUp = () => {
     // vai para o cadastro do cliente
-    //navigation.navigate("CustomerSignUp");
+    navigation.navigate("SignUp");
   };
 
   return (

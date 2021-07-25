@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Text, View, ItemBox } from '../components/Themed';
+import { Text, Title, View, ItemBox } from '../components/Themed';
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
@@ -17,7 +17,7 @@ export default function TabListScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.superiorAlign}>
-        <Text style={styles.title}>Suas reuniões</Text>
+        <Title style={styles.title}>Suas reuniões</Title>
         
         <ItemBox
           title='Reunião da crise'

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Text, View } from '../components/Themed';
+import { Ionicons as Icon } from "@expo/vector-icons";
 
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 
@@ -22,10 +23,21 @@ export default function TabCalendarScreen() {
 
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={{ uri: "https://i.imgur.com/EBPBJTM.png" }}
-      />
+
+      <View style={styles.superiorButtons}>
+        <TouchableOpacity>
+          <Icon name='ios-person' color={Colors[colorScheme].tint} size={30}/>
+        </TouchableOpacity>
+
+        <Image
+          style={styles.logo}
+          source={{ uri: "https://i.imgur.com/EBPBJTM.png" }}
+        />
+
+        <TouchableOpacity>
+          <Icon name='ios-notifications' color={Colors[colorScheme].tint} size={30}/>
+        </TouchableOpacity>
+      </View>
 
       <Calendar
         style={styles.calendar}
@@ -61,10 +73,19 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
 
+  superiorButtons: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'space-between',
+    marginHorizontal: 5,
+    marginTop: 10
+  },
+
   logo: {
     width: 150,
     height: 45,
-    marginVertical: 30,
+    marginTop: 5,
+    marginBottom: 40,
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
