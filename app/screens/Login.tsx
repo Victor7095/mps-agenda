@@ -38,9 +38,9 @@ export default () => {
         user: { username, password },
       });
       const accessToken = res.data.access_token;
-      await AsyncStorage.setItem("@RangoLegal:accessToken", accessToken);
+      await AsyncStorage.setItem("@Cronoz:accessToken", accessToken);
       await AsyncStorage.setItem(
-        "@RangoLegal:refreshToken",
+        "@Cronoz:refreshToken",
         res.data.refresh_token
       );
       const decoded: any = jwt_decode(accessToken);

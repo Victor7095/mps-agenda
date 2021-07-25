@@ -57,11 +57,11 @@ export default () => {
         },
       });
       const token = await AsyncStorage.setItem(
-        "@RangoLegal:accessToken",
+        "@Cronoz:accessToken",
         res.data.access_token
       );
       await AsyncStorage.setItem(
-        "@RangoLegal:refreshToken",
+        "@Cronoz:refreshToken",
         res.data.refresh_token
       );
       navigation.navigate("CustomerStack");

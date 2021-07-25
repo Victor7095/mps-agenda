@@ -42,7 +42,7 @@ def login():
 
   user = user_schema.dump(user)
 
-  identity = {'username': user["username"], 'user_type': user["type"],
+  identity = {'username': user["username"],
               'name': user["name"], 'id': user["id"]}
   access_token = create_access_token(identity=identity)
   response = {
@@ -50,7 +50,7 @@ def login():
       'refresh_token': create_refresh_token(identity=identity,
                                             additional_claims={
                                                 'username': user["username"],
-                                                'name': user["name"], 'user_type': user["type"]})
+                                                'name': user["name"]})
   }
   return jsonify(response), 200
 
@@ -78,14 +78,14 @@ def sign_up():
     user_dict = user_schema.dump(user)
 
     identity = {'username': user_dict["username"], 'name': user_dict["name"],
-                'id': user_dict["id"], 'user_type': user_dict["type"]}
+                'id': user_dict["id"]}
     access_token = create_access_token(identity=identity)
     response = {
         'access_token': access_token,
         'refresh_token': create_refresh_token(identity=identity,
                                               additional_claims={
                                                   'username': user_dict["username"],
-                                                  'name': user_dict["name"], "user_type": user_dict["type"]})
+                                                  'name': user_dict["name"]})
     }
     return jsonify(response), 200
   except ValidationError as e:

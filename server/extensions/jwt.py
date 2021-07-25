@@ -22,7 +22,7 @@ def my_expired_token_callback(expired_token, jwt_payload):
 # should be added to the access token.
 @jwt.additional_claims_loader
 def add_claims_to_access_token(payload):
-  return {'username': payload["username"], 'name': payload["name"], 'id': payload["id"], "user_type": payload["user_type"]}
+  return {'username': payload["username"], 'name': payload["name"], 'id': payload["id"]}
 
 
 # Create a function that will be called whenever create_access_token

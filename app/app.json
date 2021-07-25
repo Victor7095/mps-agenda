@@ -27,7 +27,7 @@
         "backgroundColor": "#ffffff"
       },
       "softwareKeyboardLayoutMode": "pan",
-      "package": "com.victor7095.rangolegal"
+      "package": "com.victor7095.cronoz"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

@@ -14,12 +14,10 @@ import {
   CancelButton,
 } from "../components/Themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-//import api from "../../services/api";
+import api from "../services/api";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import { ActivityIndicator } from "../components/ActitivityIndicator";
-
-
 
 const signUpValidationSchema = yup.object().shape({
   username: yup
@@ -36,7 +34,6 @@ const signUpValidationSchema = yup.object().shape({
     .required("Campo obrigatório"),
 });
 
-
 export default () => {
 	const colorScheme = useColorScheme();
 
@@ -45,30 +42,27 @@ export default () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignUpClick = async (values: any) => {
-    const { name, cpf, email, username, password, phone } = values;
-		/*
+    const { name, email, username, password } = values;
+		
     try {
       setIsLoading(true);
       const res = await api.post("/auth/sign_up", {
         user: {
-          name,
-          cpf: cpf.replace(/\D/g, ""),
+          name: name || username,
           email,
           username,
           password,
-          phone: phone.replace(/\D/g, ""),
-          type: "customer",
         },
       });
       const token = await AsyncStorage.setItem(
-        "@RangoLegal:accessToken",
+        "@Cronoz:accessToken",
         res.data.access_token
       );
       await AsyncStorage.setItem(
-        "@RangoLegal:refreshToken",
+        "@Cronoz:refreshToken",
         res.data.refresh_token
       );
-      navigation.navigate("CustomerStack");
+      navigation.navigate("TabNavigator");
     } catch (err) {
       let msg = "Houve um erro no seu cadastro";
       msg = err.response.data.message || msg;
@@ -76,7 +70,6 @@ export default () => {
     } finally {
       setIsLoading(false);
     }
-		*/
   };
 
   return (
@@ -94,6 +87,7 @@ export default () => {
         <Formik
           validationSchema={signUpValidationSchema}
           initialValues={{
+            name: "",
             username: "",
 						email: "",
             password: "",
