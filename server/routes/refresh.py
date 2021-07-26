@@ -20,8 +20,7 @@ def refresh_token():
 
   identity = {"id": user_id,
               "username": user_data["username"],
-              "name": user_data["name"],
-              "user_type": user_data["user_type"]}
+              "name": user_data["name"]}
 
   access_token = create_access_token(identity=identity)
   ret = {

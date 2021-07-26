@@ -3,8 +3,8 @@ import {
   StyleSheet,
   Platform,
   TouchableOpacity as DateInputButton,
+  Alert,
 } from "react-native";
-import Modal from "react-native-modal";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
 import { Formik, Field } from "formik";
@@ -19,13 +19,12 @@ import {
   TextButton,
   CancelButton,
 } from "../components/Themed";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-//import api from "../../services/api";
+import api from "../services/api";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import { ActivityIndicator } from "../components/ActitivityIndicator";
 
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker, { Event } from "@react-native-community/datetimepicker";
 
 const signUpValidationSchema = yup.object().shape({
   title: yup
@@ -37,52 +36,36 @@ const signUpValidationSchema = yup.object().shape({
 
 export default () => {
   const colorScheme = useColorScheme();
-
   const navigation = useNavigation();
 
+  const [date, setDate] = useState(new Date(Date.now()));
+  const [showDate, setShowDate] = useState(false);
+  const [showTime, setShowTime] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSave = async (values: any) => {
-    const { name, cpf, email, title, password, phone } = values;
-    /*
+    const { title, description } = values;
     try {
       setIsLoading(true);
-      const res = await api.post("/auth/sign_up", {
-        user: {
-          name,
-          cpf: cpf.replace(/\D/g, ""),
-          email,
+      const res = await api.post("/task", {
+        task: {
           title,
-          password,
-          phone: phone.replace(/\D/g, ""),
-          type: "customer",
+          date,
+          description,
         },
       });
-      const token = await AsyncStorage.setItem(
-        "@RangoLegal:accessToken",
-        res.data.access_token
-      );
-      await AsyncStorage.setItem(
-        "@RangoLegal:refreshToken",
-        res.data.refresh_token
-      );
-      navigation.navigate("CustomerStack");
+      navigation.goBack();
     } catch (err) {
-      let msg = "Houve um erro no seu cadastro";
+      let msg = "Houve um erro";
       msg = err.response.data.message || msg;
       Alert.alert("Erro", msg);
     } finally {
       setIsLoading(false);
     }
-		*/
   };
 
-  const [date, setDate] = useState(new Date(Date.now()));
-  const [showDate, setShowDate] = useState(false);
-  const [showTime, setShowTime] = useState(false);
-
-  const onChange = (value: Date) => {
-    setDate(value);
+  const onDateChange = (event: Event, date?: Date | undefined) => {
+    setDate(date!);
     if (showDate) {
       setShowDate(false);
       showTimepicker();
@@ -108,19 +91,19 @@ export default () => {
           style={styles.iosDateInput}
         >
           <DateTimePicker
-            testID="dateTimePicker"
+            testID="datePicker"
             mode="date"
             value={date}
             display="compact"
-            onChange={() => onChange(date)}
+            onChange={onDateChange}
             style={{ width: "40%" }}
           />
           <DateTimePicker
-            testID="dateTimePicker"
+            testID="timePicker"
             mode="time"
             value={date}
             display="compact"
-            onChange={() => onChange(date)}
+            onChange={onDateChange}
             style={{ width: "20%" }}
           />
         </View>
@@ -144,7 +127,7 @@ export default () => {
             value={date}
             is24Hour={true}
             display="default"
-            onChange={() => onChange(date)}
+            onChange={onDateChange}
           />
         )}
 
@@ -155,7 +138,7 @@ export default () => {
             value={date}
             is24Hour={true}
             display="default"
-            onChange={() => onChange(date)}
+            onChange={onDateChange}
           />
         )}
       </>
