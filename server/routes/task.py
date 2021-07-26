@@ -21,3 +21,23 @@ def find_by_user():
   tasks = task_schema.dump(
       user.tasks, many=True)
   return jsonify(tasks=tasks), 200
+
+
+@task.route(f'{ROUTE_PREFIX}', methods=['POST'])
+@jwt_required()
+def new_task():
+  request_data = request.get_json()
+
+  user_id = get_jwt_identity()
+  user = User.find_by_id(user_id)
+
+  task_data = request_data["task"]
+  task = task_schema.load(task_data)  # type: Task
+  task.user = user
+
+  res = Task.create(task)
+  if not res:
+    return jsonify(message="Task not created"), 400
+
+  task = task_schema.dump(task)
+  return jsonify(task=task), 200

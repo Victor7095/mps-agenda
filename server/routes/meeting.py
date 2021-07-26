@@ -21,3 +21,23 @@ def find_by_user():
   meetings = meeting_schema.dump(
       user.meetings, many=True)
   return jsonify(meetings=meetings), 200
+
+
+@meeting.route(f'{ROUTE_PREFIX}', methods=['POST'])
+@jwt_required()
+def new_meeting():
+  request_data = request.get_json()
+
+  user_id = get_jwt_identity()
+  user = User.find_by_id(user_id)
+
+  meeting_data = request_data["meeting"]
+  meeting = meeting_schema.load(meeting_data)  # type: Meeting
+  meeting.user = user
+
+  res = Meeting.create(meeting)
+  if not res:
+    return jsonify(message="Meeting not created"), 400
+
+  meeting = meeting_schema.dump(meeting)
+  return jsonify(meeting=meeting), 200

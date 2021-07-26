@@ -13,4 +13,4 @@ class TaskSchema(ma.SQLAlchemySchema):
   title = ma.auto_field(required=True)
   date = ma.auto_field(required=True)
   description = ma.auto_field(required=True)
-  user = ma.auto_field(required=True)
+  user = ma.auto_field()
