@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Platform, TouchableOpacity as DateInputButton } from "react-native";
+import {
+  StyleSheet,
+  Platform,
+  TouchableOpacity as DateInputButton,
+} from "react-native";
+import Modal from "react-native-modal";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
 import { Formik, Field } from "formik";
@@ -22,19 +27,16 @@ import { ActivityIndicator } from "../components/ActitivityIndicator";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-
 const signUpValidationSchema = yup.object().shape({
   title: yup
     .string()
     .min(3, ({ min }) => `O título deve ter pelo menos ${min} caracteres`)
     .required("Campo obrigatório"),
-	deatils: yup
-    .string(),
+  deatils: yup.string(),
 });
 
-
 export default () => {
-	const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme();
 
   const navigation = useNavigation();
 
@@ -42,7 +44,7 @@ export default () => {
 
   const handleSave = async (values: any) => {
     const { name, cpf, email, title, password, phone } = values;
-		/*
+    /*
     try {
       setIsLoading(true);
       const res = await api.post("/auth/sign_up", {
@@ -57,11 +59,11 @@ export default () => {
         },
       });
       const token = await AsyncStorage.setItem(
-        "@Cronoz:accessToken",
+        "@RangoLegal:accessToken",
         res.data.access_token
       );
       await AsyncStorage.setItem(
-        "@Cronoz:refreshToken",
+        "@RangoLegal:refreshToken",
         res.data.refresh_token
       );
       navigation.navigate("CustomerStack");
@@ -75,7 +77,6 @@ export default () => {
 		*/
   };
 
-
   const [date, setDate] = useState(new Date(Date.now()));
   const [showDate, setShowDate] = useState(false);
   const [showTime, setShowTime] = useState(false);
@@ -85,7 +86,7 @@ export default () => {
     if (showDate) {
       setShowDate(false);
       showTimepicker();
-    } else if (Platform.OS === 'android') {
+    } else if (Platform.OS === "android") {
       setShowTime(false);
     }
   };
@@ -98,6 +99,67 @@ export default () => {
     setShowTime(true);
   };
 
+  // Inputs são diferentes em iOS e Android
+  const datetimeInput =
+    Platform.OS === "ios" ? (
+      <>
+        <InputLabel>Conclusão</InputLabel>
+        <View
+          style={styles.iosDateInput}
+        >
+          <DateTimePicker
+            testID="dateTimePicker"
+            mode="date"
+            value={date}
+            display="compact"
+            onChange={() => onChange(date)}
+            style={{ width: "40%" }}
+          />
+          <DateTimePicker
+            testID="dateTimePicker"
+            mode="time"
+            value={date}
+            display="compact"
+            onChange={() => onChange(date)}
+            style={{ width: "20%" }}
+          />
+        </View>
+      </>
+    ) : (
+      <>
+        <DateInputButton
+          onPress={showDatepicker}
+          style={[
+            styles.dateInputBar,
+            { backgroundColor: Colors[colorScheme].inputBackgroundColor },
+          ]}
+        >
+          <Text>{date.toLocaleString()}</Text>
+        </DateInputButton>
+
+        {showDate && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            mode="date"
+            value={date}
+            is24Hour={true}
+            display="default"
+            onChange={() => onChange(date)}
+          />
+        )}
+
+        {showTime && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            mode="time"
+            value={date}
+            is24Hour={true}
+            display="default"
+            onChange={() => onChange(date)}
+          />
+        )}
+      </>
+    );
 
   return (
     <KeyboardAwareScrollView
@@ -110,7 +172,7 @@ export default () => {
           validationSchema={signUpValidationSchema}
           initialValues={{
             title: "",
-            details: "",
+            description: "",
           }}
           onSubmit={handleSave}
         >
@@ -124,40 +186,14 @@ export default () => {
                 containerStyle={styles.titleInputBar}
               />
 
-              <DateInputButton
-                onPress={showDatepicker}
-                style={[styles.dateInputBar, {backgroundColor: Colors[colorScheme].inputBackgroundColor}]}>
-                <Text>{date.toLocaleString()}</Text>
-              </DateInputButton>
-
-              {showDate && (
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  mode="date"
-                  value={date}
-                  is24Hour={true}
-                  display="default"
-                  onChange={() => onChange(date)}
-                />
-              )}
-
-              {showTime && (
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  mode="time"
-                  value={date}
-                  is24Hour={true}
-                  display="default"
-                  onChange={() => onChange(date)}
-                />
-              )}
+              {datetimeInput}
 
               <Field
                 component={TextInput}
-                name="title"
+                name="description"
                 placeholder="Adicionar detalhes"
-                style={styles.detailsInput}
-                containerStyle={styles.detailsInputBar}
+                style={styles.descriptionInput}
+                containerStyle={styles.descriptionInputBar}
               />
 
               <TouchableOpacity
@@ -165,9 +201,7 @@ export default () => {
                 onPress={handleSubmit as (values: any) => void}
                 disabled={!isValid}
               >
-                <TextButton style={styles.saveButtonText}>
-                  Salvar
-                </TextButton>
+                <TextButton style={styles.saveButtonText}>Salvar</TextButton>
               </TouchableOpacity>
             </>
           )}
@@ -185,20 +219,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
 
-	title: {
-    fontWeight: 'bold',
-		marginTop: 35,
-		marginBottom: 5,
+  title: {
+    fontWeight: "bold",
+    marginTop: 35,
+    marginBottom: 5,
   },
 
   titleInput: {
-		textAlign: 'center',
-		fontSize: 20,
+    textAlign: "center",
+    fontSize: 20,
   },
 
   titleInputBar: {
     marginTop: 5,
-		height: 60
+    height: 60,
+  },
+
+  iosDateInput: {
+    alignSelf: "stretch",
+    flexDirection: "row",
+    marginTop: 10,
   },
 
   dateInputBar: {
@@ -213,16 +253,17 @@ const styles = StyleSheet.create({
     marginTop: 25,
   },
 
-  detailsInput: {
-		textAlign: 'left',
-		fontSize: 14,
-    marginTop: 5
+  descriptionInput: {
+    textAlign: "left",
+    fontSize: 14,
+    marginTop: 5,
+    padding: 5
   },
 
-  detailsInputBar: {
-    alignItems: 'flex-start',
+  descriptionInputBar: {
+    alignItems: "flex-start",
     marginTop: 15,
-		height: 100
+    height: 100,
   },
 
   saveButton: {

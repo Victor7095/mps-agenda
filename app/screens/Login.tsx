@@ -10,7 +10,7 @@ import {
   TextButton,
 } from "../components/Themed";
 import { ActivityIndicator } from "../components/ActitivityIndicator";
-//import api from "../services/api";
+import api from "../services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt_decode from "jwt-decode";
 import * as yup from "yup";
@@ -31,7 +31,7 @@ export default () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignClick = async (values: any) => {
-    /*const { username, password } = values;
+    const { username, password } = values;
     try {
       setIsLoading(true);
       const res = await api.post("/auth/login", {
@@ -43,21 +43,7 @@ export default () => {
         "@Cronoz:refreshToken",
         res.data.refresh_token
       );
-      const decoded: any = jwt_decode(accessToken);
-
-      const paths: any = {
-        customer: () => {
-          navigate("CustomerStack", {});
-        },
-        market: () => {
-          navigate("MarketStack", {});
-        },
-        deliveryman: () => {
-          navigate("DeliveryStack", {});
-        },
-      };
-      const type: string = decoded["user_type"];
-      paths[type]();
+      navigation.navigate("TabNavigator");
     } catch (err) {
       let msg = "Não foi possível realizar o login";
       msg = err.response.data.message || msg;
@@ -66,8 +52,6 @@ export default () => {
     finally {
       setIsLoading(false);
     }
-    */
-    navigation.navigate("TabNavigator");
   };
 
   const handleSignUp = () => {
