@@ -55,7 +55,7 @@ export default function TabTaskScreen() {
             title={task.title}
             begin={task.date}
             end={task.date}
-            details="3 itens"
+            details="URGENTE"
             onVisitButtonPress={() => navigation.navigate("TabNavigator")}
           />
         ))}
