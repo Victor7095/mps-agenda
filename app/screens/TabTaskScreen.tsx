@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Text, Title, View, ItemBox } from "../components/Themed";
 
-import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
-
-import { useNavigation } from "@react-navigation/native";
 import { Ionicons as Icon } from "@expo/vector-icons";
 
 import api from "../services/api";
@@ -17,10 +13,7 @@ interface Task {
   description: string;
 }
 
-export default function TabTaskScreen() {
-  const colorScheme = useColorScheme();
-  const navigation = useNavigation();
-
+export default function TabTaskScreen({navigation}: any) {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
@@ -39,6 +32,7 @@ export default function TabTaskScreen() {
       const res = await api.get("/task/find_by_user");
       const newTasks = res.data.tasks;
       setTasks(newTasks);
+      console.log(newTasks);
     } catch (err) {
       console.log(err);
     }
@@ -53,8 +47,8 @@ export default function TabTaskScreen() {
           <ItemBox
             key={task.id}
             title={task.title}
-            begin={task.date}
-            end={task.date}
+            begin={new Date(task.date + 'Z').toLocaleString()}
+            end={new Date(task.date + 'Z').toLocaleString()}
             description={task.description}
             onVisitButtonPress={() => navigation.navigate("TabNavigator")}
           />
