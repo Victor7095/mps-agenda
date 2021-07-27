@@ -23,7 +23,7 @@ def find_by_user():
 
   meetings_2 = meeting_schema.dump(
       user.meetings, many=True)
-  meetings.append(meetings_2)
+  # meetings.append(meetings_2)
   return jsonify(meetings=meetings), 200
 
 
