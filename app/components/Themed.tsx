@@ -515,3 +515,64 @@ export function ItemBox(ItemData: ItemData) {
 	);
 }
  
+
+
+
+interface InvitationData {
+  owner: string;
+	meetTitle: string;
+	begin: string;
+	end: string;
+  onVisitButtonPress: Function;
+}
+  
+export function InvitationBox(InvitationData: InvitationData) {
+	const colorScheme = useColorScheme();
+  
+	const boxStyle: StyleProp<ViewStyle> = {
+	  backgroundColor: Colors[colorScheme].tint,
+	  alignItems: "stretch",
+	  alignSelf: "stretch",
+	  justifyContent: "center",
+	  borderRadius: 10,
+	  marginHorizontal: 20,
+	  marginTop: 15,
+	  paddingHorizontal: 15,
+	  height: 100,
+	};
+  
+	const ownerStyle = {
+	  color: Colors[colorScheme].textButton,
+	  fontSize: 16,
+	  fontFamily: "dustismo",
+	};
+  
+	const dateStyle = {
+	  color: Colors[colorScheme].textButton,
+	  fontSize: 14,
+	  fontFamily: "dustismo",
+	  marginTop: 2,
+	};
+
+  const descriptionStyle = {
+	  color: '#fb3c44',
+	  fontSize: 10,
+	  fontFamily: "dustismo",
+	  marginTop: 2,
+	};
+    
+	return (
+		<TouchableOpacity
+      style={boxStyle}
+      onPress={() => InvitationData.onVisitButtonPress()}
+    >
+		  <DefaultText style={ownerStyle}>
+        "{InvitationData.owner}" convidou você para a reunião "{InvitationData.meetTitle}"!
+      </DefaultText>
+	
+      <DefaultText style={dateStyle}>Início: {InvitationData.begin}</DefaultText>
+      <DefaultText style={dateStyle}>Fim: {InvitationData.end}</DefaultText>
+
+		</TouchableOpacity>
+	);
+}

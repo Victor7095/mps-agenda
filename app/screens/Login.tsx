@@ -32,7 +32,7 @@ export default () => {
 
   const handleSignClick = async (values: any) => {
     const { username, password } = values;
-    try {
+    /*try {
       setIsLoading(true);
       const res = await api.post("/auth/login", {
         user: { username, password },
@@ -51,8 +51,8 @@ export default () => {
     }
     finally {
       setIsLoading(false);
-    }
-    //navigation.navigate("TabNavigator");
+    }*/
+    navigation.navigate("TabNavigator");
   };
 
   const handleSignUp = () => {

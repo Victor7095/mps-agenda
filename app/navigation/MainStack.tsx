@@ -16,6 +16,7 @@ import AddListScreen from "../screens/AddListScreen";
 import AddMeetScreen from "../screens/AddMeetScreen";
 
 import AccountScreen from "../screens/AccountScreen";
+import NotificationScreen from "../screens/NotificationScreen";
 
 
 const Stack = createStackNavigator();
@@ -42,6 +43,7 @@ export default () => (
     <Stack.Screen name="AddMeetScreen" component={AddMeetScreen} />
 
     <Stack.Screen name="AccountScreen" component={AccountScreen} />
+    <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
 
   </Stack.Navigator>
 );

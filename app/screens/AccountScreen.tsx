@@ -38,7 +38,7 @@ const signUpValidationSchema = yup.object().shape({
 });
 
 
-export default function TabAccountScreen() {
+export default function AccountScreen() {
   const navigation = useNavigation();
   const colorScheme = useColorScheme();
 
@@ -54,8 +54,7 @@ export default function TabAccountScreen() {
 
   };
 
-
-
+  
   return (
     <KeyboardAwareScrollView
       style={{ backgroundColor: Colors[colorScheme].background }}

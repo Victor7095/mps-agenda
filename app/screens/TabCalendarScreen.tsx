@@ -36,7 +36,7 @@ export default function TabCalendarScreen() {
           source={{ uri: "https://i.imgur.com/EBPBJTM.png" }}
         />
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("NotificationScreen")}>
           <Icon name='ios-notifications' color={Colors[colorScheme].tint} size={30}/>
         </TouchableOpacity>
       </View>

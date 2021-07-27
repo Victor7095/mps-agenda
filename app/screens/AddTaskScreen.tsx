@@ -77,6 +77,20 @@ export default () => {
     }
   };
 
+  const onDateChangeAndroid = (event: Event, date?: Date | undefined) => {
+    if (date !== undefined) {
+      setDate(date);
+      if (showDate) {
+        setShowDate(false);
+        showTimepicker();
+        setShowTime(false);
+      }
+      if (Platform.OS === "android" && showTime) {
+        setShowTime(false);
+      }
+    }
+  };
+
   const showDatepicker = () => {
     setShowDate(true);
   };
@@ -125,7 +139,9 @@ export default () => {
             size={20}
             color={Colors[colorScheme].tint}
           />
-          <Text style={styles.dateInput}>{date.toLocaleString()}</Text>
+          <Text style={styles.dateInput}>
+            {date.getHours()}:{date.getMinutes()} {date.getDate()}/{date.getMonth()+1}/{date.getFullYear()}
+          </Text>
         </DateInputButton>
 
         {showDate && (
@@ -135,7 +151,7 @@ export default () => {
             value={date}
             is24Hour={true}
             display="default"
-            onChange={onDateChange}
+            onChange={onDateChangeAndroid}
           />
         )}
 
@@ -146,7 +162,7 @@ export default () => {
             value={date}
             is24Hour={true}
             display="default"
-            onChange={onDateChange}
+            onChange={onDateChangeAndroid}
           />
         )}
       </>
