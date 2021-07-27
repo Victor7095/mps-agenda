@@ -56,8 +56,8 @@ export default function TabListScreen({navigation} : any) {
           <ItemBox
             key={meeting.id}
             title={meeting.title}
-            begin={new Date(meeting.date + "Z").toLocaleString()}
-            end="-"
+            begin={meeting.date}
+            end={null}
             description={`${meeting.guests_count} Pessoas`}
             onVisitButtonPress={() => navigation.navigate("TabNavigator")}
           />

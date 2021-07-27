@@ -47,8 +47,8 @@ export default function TabTaskScreen({navigation}: any) {
           <ItemBox
             key={task.id}
             title={task.title}
-            begin={new Date(task.date + 'Z').toLocaleString()}
-            end={new Date(task.date + 'Z').toLocaleString()}
+            begin={task.date}
+            end={null}
             description={task.description}
             onVisitButtonPress={() => navigation.navigate("TabNavigator")}
           />

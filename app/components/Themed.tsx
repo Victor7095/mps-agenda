@@ -449,8 +449,8 @@ export const Select = React.memo(
 
 interface ItemData {
 	title: string;
-	begin: string;
-	end: string;
+	begin: any;
+	end: any;
 	description: string;
   onVisitButtonPress: Function;
 }
@@ -496,6 +496,9 @@ export function ItemBox(ItemData: ItemData) {
 	  fontFamily: "dustismo",
 	  marginTop: 2,
 	};
+
+  const begin = new Date(ItemData.begin + "Z");
+  const end = new Date(ItemData.end + "Z");
     
 	return (
 		<TouchableOpacity
@@ -505,11 +508,19 @@ export function ItemBox(ItemData: ItemData) {
 		  <DefaultText style={titleStyle}>{ItemData.title}</DefaultText>
 		  
       <DefaultView style={infoStyle}>
-        <DefaultText style={dateStyle}>Início: {ItemData.begin}</DefaultText>
+        <DefaultText style={dateStyle}>
+          Início: {begin.getHours()}:{begin.getMinutes()} {begin.getDate()}/
+          {begin.getMonth() + 1}/{begin.getFullYear()}
+        </DefaultText>
         <DefaultText style={descriptionStyle}>{ItemData.description}</DefaultText>
       </DefaultView>
 
-      <DefaultText style={dateStyle}>Fim: {ItemData.end}</DefaultText>
+      {ItemData.end && (
+        <DefaultText style={dateStyle}>
+          Fim: {end.getHours()}:{end.getMinutes()} {end.getDate()}/
+          {end.getMonth() + 1}/{end.getFullYear()}
+        </DefaultText>
+      )}
 
 		</TouchableOpacity>
 	);
@@ -521,8 +532,8 @@ export function ItemBox(ItemData: ItemData) {
 interface InvitationData {
   owner: string;
 	meetTitle: string;
-	begin: string;
-	end: string;
+	begin: Date;
+	end: Date;
   onVisitButtonPress: Function;
 }
   
@@ -554,13 +565,9 @@ export function InvitationBox(InvitationData: InvitationData) {
 	  marginTop: 2,
 	};
 
-  const descriptionStyle = {
-	  color: '#fb3c44',
-	  fontSize: 10,
-	  fontFamily: "dustismo",
-	  marginTop: 2,
-	};
-    
+  const begin = new Date(InvitationData.begin + "Z");
+  const end = new Date(InvitationData.end + "Z");
+  
 	return (
 		<TouchableOpacity
       style={boxStyle}
@@ -570,8 +577,17 @@ export function InvitationBox(InvitationData: InvitationData) {
         "{InvitationData.owner}" convidou você para a reunião "{InvitationData.meetTitle}"!
       </DefaultText>
 	
-      <DefaultText style={dateStyle}>Início: {InvitationData.begin}</DefaultText>
-      <DefaultText style={dateStyle}>Fim: {InvitationData.end}</DefaultText>
+      <DefaultText style={dateStyle}>
+        Início: {begin.getHours()}:{begin.getMinutes()} {begin.getDate()}/
+        {begin.getMonth() + 1}/{begin.getFullYear()}
+      </DefaultText>
+
+      {InvitationData.end && (
+        <DefaultText style={dateStyle}>
+          Fim: {end.getHours()}:{end.getMinutes()} {end.getDate()}/
+          {end.getMonth() + 1}/{end.getFullYear()}
+        </DefaultText>
+      )}
 
 		</TouchableOpacity>
 	);
