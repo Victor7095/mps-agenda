@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
+import * as Notifications from 'expo-notifications';
 import { Formik, Field } from "formik";
 import * as yup from "yup";
 import {
@@ -47,6 +48,7 @@ export default () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSave = async (values: any) => {
+    console.log(date);
     const { title, description } = values;
     try {
       setIsLoading(true);
@@ -56,6 +58,13 @@ export default () => {
           date,
           description,
         },
+      });
+      Notifications.scheduleNotificationAsync({
+        content: {
+          title: title,
+          body: description,
+        },
+        trigger: date,
       });
       navigation.goBack();
     } catch (err) {
