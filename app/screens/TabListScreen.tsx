@@ -53,7 +53,7 @@ export default function TabListScreen() {
             key={list.id}
             title={list.title}
             begin={list.date}
-            end={list.date}
+            end={null}
             description="3 itens"
             onVisitButtonPress={() => navigation.navigate("TabNavigator")}
           />

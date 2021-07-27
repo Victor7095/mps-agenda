@@ -140,7 +140,8 @@ export default () => {
             color={Colors[colorScheme].tint}
           />
           <Text style={styles.dateInput}>
-            {date.getHours()}:{date.getMinutes()} {date.getDate()}/{date.getMonth()+1}/{date.getFullYear()}
+            {date.getHours()}:{date.getMinutes()} {date.getDate()}/
+            {date.getMonth()+1}/{date.getFullYear()}
           </Text>
         </DateInputButton>
 
