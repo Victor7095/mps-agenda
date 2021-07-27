@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   StyleSheet,
   Platform,
-  TouchableOpacity as DateInputButton,
+  TouchableOpacity as DefaultTouchableOpacity,
   Alert,
   FlatList,
 } from "react-native";
@@ -28,37 +28,29 @@ import { Ionicons as Icon } from "@expo/vector-icons";
 
 import DateTimePicker, { Event } from "@react-native-community/datetimepicker";
 
-
 const signUpValidationSchema = yup.object().shape({
   title: yup
     .string()
     .min(3, ({ min }) => `O título deve ter pelo menos ${min} caracteres`)
     .required("Campo obrigatório"),
-  description: yup
-  	.string()
-		.max(10, ({ max }) => `A descrição deve ter no máximo ${max} caracteres`),
+  observations: yup
+    .string()
+    .max(10, ({ max }) => `A descrição deve ter no máximo ${max} caracteres`),
 });
+
+interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+}
 
 export default () => {
   const colorScheme = useColorScheme();
   const navigation = useNavigation();
 
-  //const [listPerson, setlistPerson] = useState<listPerson[]>([]);
-
-  const listPerson = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    name: "First Person",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    name: "Second Person",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    name: "Third Person",
-  }
-];
+  const [suggestedUsers, setSuggestedUsers] = useState<User[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
 
   const [date, setDate] = useState(new Date());
   const [showDate, setShowDate] = useState(false);
@@ -66,14 +58,18 @@ export default () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSave = async (values: any) => {
-    const { title, description } = values;
+    const { title, people, place, link, observations } = values;
     try {
       setIsLoading(true);
-      const res = await api.post("/task", {
-        task: {
+      const res = await api.post("/meeting", {
+        meeting: {
           title,
           date,
-          description,
+          category: title,
+          place,
+          link,
+          observations,
+          users: selectedUsers
         },
       });
       navigation.goBack();
@@ -118,14 +114,21 @@ export default () => {
     setShowTime(true);
   };
 
+  const searchUsers = async (val: string) => {
+    try {
+      const res = await api.get("/user/search", { params: { name: val } });
+      setSuggestedUsers(res.data.users);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   // Inputs são diferentes em iOS e Android
   const datetimeInput =
     Platform.OS === "ios" ? (
       <>
-        <InputLabel>Conclusão</InputLabel>
-        <View
-          style={styles.iosDateInput}
-        >
+        <InputLabel>Quando</InputLabel>
+        <View style={styles.iosDateInput}>
           <DateTimePicker
             testID="datePicker"
             mode="date"
@@ -146,22 +149,19 @@ export default () => {
       </>
     ) : (
       <>
-        <DateInputButton
+        <DefaultTouchableOpacity
           onPress={showDatepicker}
           style={[
             styles.dateInputBar,
             { backgroundColor: Colors[colorScheme].inputBackgroundColor },
           ]}
         >
-          <Icon
-            name="ios-time"
-            size={20}
-            color={Colors[colorScheme].tint}
-          />
+          <Icon name="ios-time" size={20} color={Colors[colorScheme].tint} />
           <Text style={styles.dateInput}>
-            {date.getHours()}:{date.getMinutes()} {date.getDate()}/{date.getMonth()+1}/{date.getFullYear()}
+            {date.getHours()}:{date.getMinutes()} {date.getDate()}/
+            {date.getMonth() + 1}/{date.getFullYear()}
           </Text>
-        </DateInputButton>
+        </DefaultTouchableOpacity>
 
         {showDate && (
           <DateTimePicker
@@ -187,6 +187,18 @@ export default () => {
       </>
     );
 
+  const addUser = (user: User) => {
+    const idx = selectedUsers.findIndex((u) => u.id === user.id);
+    if (idx === -1) setSelectedUsers([...selectedUsers, user]);
+  };
+
+  const removeUser = (user: User) => {
+    const idx = selectedUsers.findIndex((u) => u.id === user.id);
+    const users = [...selectedUsers];
+    users.splice(idx, 1);
+    setSelectedUsers(users);
+  };
+
   return (
     <KeyboardAwareScrollView
       style={{ backgroundColor: Colors[colorScheme].background }}
@@ -198,9 +210,10 @@ export default () => {
           validationSchema={signUpValidationSchema}
           initialValues={{
             title: "",
-            description: "",
-            people: null,
-            local: ""
+            observations: "",
+            people: "",
+            place: "",
+            link: "",
           }}
           onSubmit={handleSave}
         >
@@ -221,29 +234,46 @@ export default () => {
 
               {datetimeInput}
 
-							{datetimeInput}
-
               <Field
                 component={TextInput}
                 name="people"
                 placeholder="Adicionar pessoas"
                 style={styles.itemInput}
                 containerStyle={styles.itemInputBar}
+                onChangeText={searchUsers}
                 icon={{
                   name: "ios-add-circle",
                   size: 20,
                   color: Colors[colorScheme].tint,
                 }}
               />
-
-              {listPerson.map((listPerson) => (
-                <Text key={listPerson.id} style={styles.listPeople} >{listPerson.name}</Text> 
+              <View style={styles.selectedUsersContainer}>
+                {selectedUsers.map((user) => (
+                  <DefaultTouchableOpacity
+                    key={user.id}
+                    style={styles.selectedUsers}
+                    onPress={() => removeUser(user)}
+                  >
+                    <Text>{user.username}</Text>
+                  </DefaultTouchableOpacity>
+                ))}
+              </View>
+              {suggestedUsers.map((user) => (
+                <DefaultTouchableOpacity
+                  key={user.id}
+                  style={styles.suggestedUsers}
+                  onPress={() => addUser(user)}
+                >
+                  <Text>
+                    {user.name} - {user.username}
+                  </Text>
+                </DefaultTouchableOpacity>
               ))}
 
               <Field
                 component={TextInput}
-                name="local"
-                placeholder="Adicionar local ou link"
+                name="place"
+                placeholder="Adicionar local"
                 style={styles.itemInput}
                 containerStyle={styles.itemInputBar}
                 icon={{
@@ -255,10 +285,23 @@ export default () => {
 
               <Field
                 component={TextInput}
-                name="description"
+                name="link"
+                placeholder="Link da reunião"
+                style={styles.itemInput}
+                containerStyle={styles.itemInputBar}
+                icon={{
+                  name: "ios-link",
+                  size: 20,
+                  color: Colors[colorScheme].tint,
+                }}
+              />
+
+              <Field
+                component={TextInput}
+                name="observations"
                 placeholder="Adicionar descrição"
-                style={styles.descriptionInput}
-                containerStyle={styles.descriptionInputBar}
+                style={styles.observationsInput}
+                containerStyle={styles.observationsInputBar}
               />
 
               <TouchableOpacity
@@ -318,14 +361,14 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
 
-  descriptionInput: {
+  observationsInput: {
     textAlign: "left",
     fontSize: 14,
     marginTop: 5,
     padding: 5,
   },
 
-  descriptionInputBar: {
+  observationsInputBar: {
     alignItems: "flex-start",
     marginTop: 15,
     height: 120,
@@ -339,8 +382,26 @@ const styles = StyleSheet.create({
     marginTop: 15,
     height: 50,
   },
+  selectedUsersContainer: {
+    flexDirection: "row",
+    alignSelf: "stretch",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    flexWrap: "wrap",
+  },
+  selectedUsers: {
+    fontFamily: "dustismo",
+    fontSize: 15,
+    alignSelf: "flex-start",
+    borderRadius: 15,
+    borderColor: "#ddd",
+    borderWidth: 1,
+    marginTop: 5,
+    padding: 5,
+    marginRight: 5,
+  },
 
-  listPeople: {
+  suggestedUsers: {
     fontFamily: "dustismo",
     fontSize: 15,
     alignSelf: "flex-start",
@@ -363,5 +424,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "dustismo",
   },
-
 });

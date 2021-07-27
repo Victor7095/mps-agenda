@@ -25,7 +25,7 @@ export default () => {
 
   useEffect(() => {
     // checagem de token
-    AsyncStorage.getItem("@RangoLegal:accessToken")
+    AsyncStorage.getItem("@Cronoz:accessToken")
       .then((res) => {
         const decoded: any = jwt_decode(res!);
         navigation.navigate("TabNavigator");

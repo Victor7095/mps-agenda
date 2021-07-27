@@ -10,7 +10,7 @@ class Meeting(db.Model):
   title = db.Column(db.String(100), nullable=False)
   date = db.Column(
       db.DateTime, default=datetime.datetime.utcnow, nullable=False)
-  place = db.Column(db.String(11), nullable=False)
+  place = db.Column(db.String(11), nullable=True)
   link = db.Column(db.String(200), nullable=True)
   category = db.Column(db.String(200), nullable=True)
   observations = db.Column(db.String(200), nullable=True)

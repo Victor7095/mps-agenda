@@ -8,7 +8,7 @@ import jwt_decode from "jwt-decode";
  ** Local:           http://localhost:5000/
  */
 const api = axios.create({
-  baseURL: "http://192.168.0.24:5000/",
+  baseURL: "https://cronoz.herokuapp.com/",
 });
 
 api.interceptors.request.use(

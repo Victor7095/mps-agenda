@@ -19,25 +19,33 @@ def find_by_user():
   user = User.find_by_id(user_id)
 
   meetings = meeting_schema.dump(
-      user.meetings, many=True)
+      user.hosted_meetings, many=True)
   return jsonify(meetings=meetings), 200
 
 
 @meeting.route(f'{ROUTE_PREFIX}', methods=['POST'])
 @jwt_required()
 def new_meeting():
-  request_data = request.get_json()
+  try:
+    request_data = request.get_json()
 
-  user_id = get_jwt_identity()
-  user = User.find_by_id(user_id)
+    user_id = get_jwt_identity()
+    user = User.find_by_id(user_id)
 
-  meeting_data = request_data["meeting"]
-  meeting = meeting_schema.load(meeting_data)  # type: Meeting
-  meeting.user = user
+    meeting_data = request_data["meeting"]
+    meeting = meeting_schema.load(meeting_data)  # type: Meeting
 
-  res = Meeting.create(meeting)
-  if not res:
+    user.hosted_meetings.append(meeting)
+    for invited_user in meeting_data["users"]:
+      u = User.find_by_id(invited_user['id'])
+      meeting.guests.append(u)
+
+    res = Meeting.create(meeting)
+    if not res:
+      return jsonify(message="Meeting not created"), 400
+
+    meeting = meeting_schema.dump(meeting)
+    return jsonify(meeting=meeting), 200
+  except Exception as e:
+    print(e)
     return jsonify(message="Meeting not created"), 400
-
-  meeting = meeting_schema.dump(meeting)
-  return jsonify(meeting=meeting), 200
