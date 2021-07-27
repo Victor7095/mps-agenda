@@ -8,7 +8,7 @@ from routes.refresh import refresh
 from routes.meeting import meeting
 from routes.task import task
 from routes.list import list
-# from routes.user import user
+from routes.user import user
 
 from models.database import db, ma
 
@@ -52,7 +52,7 @@ app.register_blueprint(refresh)
 app.register_blueprint(meeting)
 app.register_blueprint(task)
 app.register_blueprint(list)
-# app.register_blueprint(client)
+app.register_blueprint(user)
 
 
 # Invoked callback to set response code in all responses

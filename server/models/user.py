@@ -2,6 +2,7 @@ from typing import List
 from models.database import db
 from sqlalchemy.ext.hybrid import hybrid_property
 import bcrypt
+from sqlalchemy import or_
 
 
 class User(db.Model):
@@ -59,6 +60,12 @@ class User(db.Model):
   @staticmethod
   def find_by_username(username: str) -> "User":
     return User.query.filter(User.username == username).first()
+
+  # CRUD methods
+  @staticmethod
+  def search(user_id: int, name: str) -> List["User"]:
+    name = "%{}%".format(name)
+    return User.query.filter(User.id != user_id, or_(User.username.like(name), User.name.like(name))).limit(5).all()
 
   # CRUD methods
   @staticmethod
