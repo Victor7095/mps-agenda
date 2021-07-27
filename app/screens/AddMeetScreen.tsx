@@ -4,6 +4,7 @@ import {
   Platform,
   TouchableOpacity as DateInputButton,
   Alert,
+  FlatList,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
@@ -27,21 +28,39 @@ import { Ionicons as Icon } from "@expo/vector-icons";
 
 import DateTimePicker, { Event } from "@react-native-community/datetimepicker";
 
+
 const signUpValidationSchema = yup.object().shape({
   title: yup
     .string()
     .min(3, ({ min }) => `O título deve ter pelo menos ${min} caracteres`)
     .required("Campo obrigatório"),
   description: yup
-  .string()
-	.max(10, ({ max }) => `A descrição deve ter no máximo ${max} caracteres`),
+  	.string()
+		.max(10, ({ max }) => `A descrição deve ter no máximo ${max} caracteres`),
 });
 
 export default () => {
   const colorScheme = useColorScheme();
   const navigation = useNavigation();
 
-  const [date, setDate] = useState(new Date(Date.now()));
+  //const [listPerson, setlistPerson] = useState<listPerson[]>([]);
+
+  const listPerson = [
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    name: "First Person",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    name: "Second Person",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    name: "Third Person",
+  }
+];
+
+  const [date, setDate] = useState(new Date());
   const [showDate, setShowDate] = useState(false);
   const [showTime, setShowTime] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -164,6 +183,8 @@ export default () => {
           initialValues={{
             title: "",
             description: "",
+            people: null,
+            local: ""
           }}
           onSubmit={handleSave}
         >
@@ -172,17 +193,49 @@ export default () => {
               <Field
                 component={TextInput}
                 name="title"
-                placeholder="Título da tarefa"
+                placeholder="Título da reunião"
                 style={styles.titleInput}
                 containerStyle={styles.titleInputBar}
                 icon={{
-                  name: "ios-create",
+                  name: "ios-people",
                   size: 25,
                   color: Colors[colorScheme].tint,
                 }}
               />
 
               {datetimeInput}
+
+							{datetimeInput}
+
+              <Field
+                component={TextInput}
+                name="people"
+                placeholder="Adicionar pessoas"
+                style={styles.itemInput}
+                containerStyle={styles.itemInputBar}
+                icon={{
+                  name: "ios-add-circle",
+                  size: 20,
+                  color: Colors[colorScheme].tint,
+                }}
+              />
+
+              {listPerson.map((listPerson) => (
+                <Text key={listPerson.id} style={styles.listPeople} >{listPerson.name}</Text> 
+              ))}
+
+              <Field
+                component={TextInput}
+                name="local"
+                placeholder="Adicionar local ou link"
+                style={styles.itemInput}
+                containerStyle={styles.itemInputBar}
+                icon={{
+                  name: "ios-location",
+                  size: 20,
+                  color: Colors[colorScheme].tint,
+                }}
+              />
 
               <Field
                 component={TextInput}
@@ -233,7 +286,8 @@ const styles = StyleSheet.create({
 
   dateInput: {
     marginLeft: 10,
-    fontFamily: "dustismo"
+    fontFamily: "dustismo",
+    fontSize: 15,
   },
 
   dateInputBar: {
@@ -261,6 +315,23 @@ const styles = StyleSheet.create({
     height: 120,
   },
 
+  itemInput: {
+    fontSize: 15,
+  },
+
+  itemInputBar: {
+    marginTop: 15,
+    height: 50,
+  },
+
+  listPeople: {
+    fontFamily: "dustismo",
+    fontSize: 15,
+    alignSelf: "flex-start",
+    marginLeft: 25,
+    marginTop: 5,
+  },
+
   saveButton: {
     height: 40,
     width: 200,
@@ -276,4 +347,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "dustismo",
   },
+
 });

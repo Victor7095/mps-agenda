@@ -23,12 +23,15 @@ export default function TabListScreen() {
           title='Reunião da crise'
           begin='14:00 24/08/2012'
           end='-'
-          details='3 pessoas'
+          description='3 pessoas'
           onVisitButtonPress={() => navigation.navigate("TabNavigator")}
         />
       </View>
 
-      <TouchableOpacity style={styles.addButton}>
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => navigation.navigate("AddMeetScreen")}
+      >
         <Icon name="add-circle" color='#fb3c44' size={60} />
       </TouchableOpacity>
 

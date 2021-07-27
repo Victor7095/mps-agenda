@@ -54,13 +54,16 @@ export default function TabListScreen() {
             title={list.title}
             begin={list.date}
             end={list.date}
-            details="3 itens"
+            description="3 itens"
             onVisitButtonPress={() => navigation.navigate("TabNavigator")}
           />
         ))}
       </View>
 
-      <TouchableOpacity style={styles.addButton}>
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => navigation.navigate("AddListScreen")}
+      >
         <Icon name="add-circle" color="#fb3c44" size={60} />
       </TouchableOpacity>
     </View>

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { Ionicons as Icon } from "@expo/vector-icons";
@@ -10,6 +11,7 @@ import useColorScheme from "../hooks/useColorScheme";
 
 
 export default function TabCalendarScreen() {
+  const navigation = useNavigation();
   const colorScheme = useColorScheme();
 
   LocaleConfig.locales['br'] = {
@@ -25,7 +27,7 @@ export default function TabCalendarScreen() {
     <View style={styles.container}>
 
       <View style={styles.superiorButtons}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("AccountScreen")}>
           <Icon name='ios-person' color={Colors[colorScheme].tint} size={30}/>
         </TouchableOpacity>
 

@@ -55,13 +55,16 @@ export default function TabTaskScreen() {
             title={task.title}
             begin={task.date}
             end={task.date}
-            details="URGENTE"
+            description={task.description}
             onVisitButtonPress={() => navigation.navigate("TabNavigator")}
           />
         ))}
       </View>
 
-      <TouchableOpacity style={styles.addButton}>
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => navigation.navigate("AddTaskScreen")}
+      >
         <Icon name="add-circle" color="#fb3c44" size={60} />
       </TouchableOpacity>
     </View>

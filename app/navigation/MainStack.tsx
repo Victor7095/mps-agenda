@@ -12,6 +12,10 @@ import TabTaskScreen from "../screens/TabTaskScreen";
 import TabMeetScreen from "../screens/TabMeetScreen";
 
 import AddTaskScreen from "../screens/AddTaskScreen";
+import AddListScreen from "../screens/AddListScreen";
+import AddMeetScreen from "../screens/AddMeetScreen";
+
+import AccountScreen from "../screens/AccountScreen";
 
 
 const Stack = createStackNavigator();
@@ -34,6 +38,10 @@ export default () => (
 		<Stack.Screen name="TabMeetScreen" component={TabMeetScreen} />
 
     <Stack.Screen name="AddTaskScreen" component={AddTaskScreen} />
+    <Stack.Screen name="AddListScreen" component={AddListScreen} />
+    <Stack.Screen name="AddMeetScreen" component={AddMeetScreen} />
+
+    <Stack.Screen name="AccountScreen" component={AccountScreen} />
 
   </Stack.Navigator>
 );

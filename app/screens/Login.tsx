@@ -52,10 +52,10 @@ export default () => {
     finally {
       setIsLoading(false);
     }
+    //navigation.navigate("TabNavigator");
   };
 
   const handleSignUp = () => {
-    // vai para o cadastro do cliente
     navigation.navigate("SignUp");
   };
 

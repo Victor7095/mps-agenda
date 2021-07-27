@@ -4,6 +4,7 @@ import {
   Platform,
   TouchableOpacity as DateInputButton,
   Alert,
+  FlatList,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
@@ -27,21 +28,39 @@ import { Ionicons as Icon } from "@expo/vector-icons";
 
 import DateTimePicker, { Event } from "@react-native-community/datetimepicker";
 
+
 const signUpValidationSchema = yup.object().shape({
   title: yup
     .string()
     .min(3, ({ min }) => `O título deve ter pelo menos ${min} caracteres`)
     .required("Campo obrigatório"),
   description: yup
-  .string()
-	.max(10, ({ max }) => `A descrição deve ter no máximo ${max} caracteres`),
+  	.string()
+		.max(10, ({ max }) => `A descrição deve ter no máximo ${max} caracteres`),
 });
 
 export default () => {
   const colorScheme = useColorScheme();
   const navigation = useNavigation();
 
-  const [date, setDate] = useState(new Date(Date.now()));
+  //const [listItem, setListItem] = useState<ListItem[]>([]);
+
+  const listItem = [
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    name: "First Item",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    name: "Second Item",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    name: "Third Item",
+  }
+];
+
+  const [date, setDate] = useState(new Date());
   const [showDate, setShowDate] = useState(false);
   const [showTime, setShowTime] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -164,6 +183,7 @@ export default () => {
           initialValues={{
             title: "",
             description: "",
+            items: null,
           }}
           onSubmit={handleSave}
         >
@@ -172,17 +192,36 @@ export default () => {
               <Field
                 component={TextInput}
                 name="title"
-                placeholder="Título da tarefa"
+                placeholder="Título da lista"
                 style={styles.titleInput}
                 containerStyle={styles.titleInputBar}
                 icon={{
-                  name: "ios-create",
+                  name: "ios-list",
                   size: 25,
                   color: Colors[colorScheme].tint,
                 }}
               />
 
               {datetimeInput}
+
+							{datetimeInput}
+
+              <Field
+                component={TextInput}
+                name="items"
+                placeholder="Adicionar itens"
+                style={styles.itemInput}
+                containerStyle={styles.itemInputBar}
+                icon={{
+                  name: "ios-add-circle",
+                  size: 20,
+                  color: Colors[colorScheme].tint,
+                }}
+              />
+
+              {listItem.map((listItem) => (
+                <Text key={listItem.id} style={styles.listItems} >{listItem.name}</Text> 
+              ))}
 
               <Field
                 component={TextInput}
@@ -233,7 +272,8 @@ const styles = StyleSheet.create({
 
   dateInput: {
     marginLeft: 10,
-    fontFamily: "dustismo"
+    fontFamily: "dustismo",
+    fontSize: 15,
   },
 
   dateInputBar: {
@@ -261,6 +301,23 @@ const styles = StyleSheet.create({
     height: 120,
   },
 
+  itemInput: {
+    fontSize: 15,
+  },
+
+  itemInputBar: {
+    marginTop: 15,
+    height: 50,
+  },
+
+  listItems: {
+    fontFamily: "dustismo",
+    fontSize: 15,
+    alignSelf: "flex-start",
+    marginLeft: 25,
+    marginTop: 5,
+  },
+
   saveButton: {
     height: 40,
     width: 200,
@@ -276,4 +333,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "dustismo",
   },
+
 });

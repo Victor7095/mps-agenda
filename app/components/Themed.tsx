@@ -216,9 +216,10 @@ export const TextInput = React.forwardRef<TextInputMask, TextInputProps>(
       borderWidth: 1,
     };
 
-    const defaultInputStyle: StyleProp<ViewStyle> = {
+    const defaultInputStyle = {
       flex: 1,
       paddingLeft: 10,
+      fontFamily: "dustismo"
     };
 
     const defaultIconStyle = { paddingVertical: 10, paddingLeft: 10 };
@@ -450,7 +451,7 @@ interface ItemData {
 	title: string;
 	begin: string;
 	end: string;
-	details: string;
+	description: string;
   onVisitButtonPress: Function;
 }
   
@@ -489,9 +490,9 @@ export function ItemBox(ItemData: ItemData) {
 	  marginTop: 2,
 	};
 
-  const detailsStyle = {
+  const descriptionStyle = {
 	  color: '#fb3c44',
-	  fontSize: 14,
+	  fontSize: 10,
 	  fontFamily: "dustismo",
 	  marginTop: 2,
 	};
@@ -505,7 +506,7 @@ export function ItemBox(ItemData: ItemData) {
 		  
       <DefaultView style={infoStyle}>
         <DefaultText style={dateStyle}>Início: {ItemData.begin}</DefaultText>
-        <DefaultText style={detailsStyle}>{ItemData.details}</DefaultText>
+        <DefaultText style={descriptionStyle}>{ItemData.description}</DefaultText>
       </DefaultView>
 
       <DefaultText style={dateStyle}>Fim: {ItemData.end}</DefaultText>

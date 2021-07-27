@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
+    "@react-native-async-storage/async-storage": "^1.13.0",
     "@react-native-community/datetimepicker": "3.2.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "5.11.2",
@@ -37,6 +38,7 @@
     "react-native-bouncy-checkbox": "^2.1.2",
     "react-native-calendar-picker": "^7.1.2",
     "react-native-calendars": "^1.1264.0",
+    "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-google-places-autocomplete": "^2.2.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.4",
@@ -51,8 +53,7 @@
     "react-number-format": "^4.6.3",
     "styled-components": "^5.3.0",
     "validations-br": "^1.2.0",
-    "yup": "^0.32.9",
-    "@react-native-async-storage/async-storage": "^1.13.0"
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
