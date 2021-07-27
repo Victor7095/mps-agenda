@@ -20,6 +20,11 @@ def find_by_user():
 
   meetings = meeting_schema.dump(
       user.hosted_meetings, many=True)
+
+  meetings_2 = meeting_schema.dump(
+      user.meetings, many=True)
+
+  meetings = meetings.append(meetings_2)
   return jsonify(meetings=meetings), 200
 
 
