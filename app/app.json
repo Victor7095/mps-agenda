@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "rango-legal",
-    "slug": "rango-legal",
+    "name": "Cronoz",
+    "slug": "cronoz",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "https://i.imgur.com/EBPBJTM.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
