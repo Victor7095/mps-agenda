@@ -63,7 +63,7 @@
     "@types/react-native": "~0.63.2",
     "@types/react-native-calendars": "^1.505.4",
     "jest": "^27.0.4",
-    "jest-expo": "~41.0.0",
+    "jest-expo": "~48.0.2",
     "react-native-dotenv": "^2.5.5",
     "ts-jest": "^27.0.3",
     "typescript": "^4.0.7"
