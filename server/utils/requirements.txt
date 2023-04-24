@@ -1,4 +1,4 @@
-﻿astroid==2.6.5
+astroid==2.6.5
 bcrypt==3.2.0
 cffi==1.14.6
 click==8.0.1
@@ -28,6 +28,6 @@ six==1.16.0
 SQLAlchemy==1.4.22
 toml==0.10.2
 waitress==2.0.0
-Werkzeug==2.0.1
+Werkzeug==2.2.3
 wrapt==1.12.1
 zxcvbn==4.4.28
